@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <div>
         <Header dispatch={dispatch} isAuthenticated={isAuthenticated} />
-        <div className="alert alert-danger">{errorMessage}</div>
+        {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
         {children}
       </div>
     );

@@ -44,7 +44,7 @@ function signinUser(creds) {
   return dispatch => {
     dispatch(requestJwt(creds));
 
-    return fetch('/api/auth/local', options).then((response) => {
+    return fetch('http://localhost:1337/api/auth/local', options).then((response) => {
       response.json();
     }).then((json) => {
       console.log(json);
@@ -58,7 +58,10 @@ function signinUser(creds) {
       localStorage.setItem('strapiJwt', json.jwt);
       dispatch(receiveJwt(json.user, json.jwt));
       return Promise.resolve();
-    }).catch((err) => console.error(err));
+    }).catch((err) => {
+      console.log(err);
+      dispatch(signinError("Error during signin."));
+    });
   };
 }
 
@@ -88,7 +91,6 @@ export const actions = {
 const initialState = {
   isFetching: false,
   isAuthenticated: false, // localStorage.getItem('id_token') ? true : false
-  errorMessage: 'pas d\'erreur',
 };
 
 export default function auth(state = initialState, action) {

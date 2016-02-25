@@ -9,7 +9,9 @@ class SignIn extends Component {
     this._handleClick = this._handleClick.bind(this);
   }
 
-  _handleClick() {
+  _handleClick(evt) {
+    evt.preventDefault();
+
     const creds = {
       identifier: this._identifier,
       password: this._password,
@@ -29,7 +31,7 @@ class SignIn extends Component {
               className="form-control"
               id="inputIdentifier"
               placeholder="Username or Email"
-              ref={function (node) { this._identifier = node.value; }}
+              ref={(node) => { this._identifier = node.value; }}
             />
           </div>
         </div>
@@ -41,7 +43,7 @@ class SignIn extends Component {
               className="form-control"
               id="inputPassword"
               placeholder="Password"
-              ref={function (node) { this._password = node.value; }}
+              ref={(node) => { this._password = node.value; }}
             />
           </div>
         </div>

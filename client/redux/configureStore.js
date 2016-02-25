@@ -1,22 +1,20 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
-import { logger } from './middlewares';
 import rootReducer from './rootReducer';
 
-export default function configureStore(initialState) {
-  const store = createStore(
-    rootReducer,
-    initialState,
-    applyMiddleware(logger, thunk)
-  );
+export default function configureStore() {
+  const store = createStore(rootReducer, compose(
+    applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  ));
 
-  // if (module.hot) {
-  //   module.hot.accept('../reducers', () => {
-  //     const nextReducer = require('../reducers')
-  //     store.replaceReducer(nextReducer)
-  //   })
-  // }
+  if (module.hot) {
+    module.hot.accept('./rootReducer', () => {
+      const nextReducer = require('./rootReducer');
+      store.replaceReducer(nextReducer);
+    });
+  }
 
   return store;
 }

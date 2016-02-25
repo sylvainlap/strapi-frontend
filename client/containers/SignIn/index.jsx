@@ -2,12 +2,22 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { actions as authActions } from '../../redux/modules/auth';
-import { actions as messagesActions } from '../../redux/modules/messages';
 
 class SignIn extends Component {
-  render() {
-    const { dispatch } = this.props;
+  constructor() {
+    super();
+    this._handleClick = this._handleClick.bind(this);
+  }
 
+  _handleClick() {
+    const creds = {
+      identifier: this._identifier,
+      password: this._password,
+    };
+    this.props.dispatch(authActions.signinUser(creds));
+  }
+
+  render() {
     return (
       <form className="form-horizontal">
         <h2>Please sign in</h2>
@@ -19,6 +29,7 @@ class SignIn extends Component {
               className="form-control"
               id="inputIdentifier"
               placeholder="Username or Email"
+              ref={function (node) { this._identifier = node.value; }}
             />
           </div>
         </div>
@@ -30,12 +41,13 @@ class SignIn extends Component {
               className="form-control"
               id="inputPassword"
               placeholder="Password"
+              ref={function (node) { this._password = node.value; }}
             />
           </div>
         </div>
         <div className="form-group">
           <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-default">Sign in</button>
+            <button type="submit" className="btn btn-default" onClick={this._handleClick}>Sign in</button>
           </div>
         </div>
       </form>

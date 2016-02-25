@@ -1,11 +1,15 @@
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import { render } from 'react-dom';
 import React from 'react';
 
-import App from './containers/App';
 import configureStore from './redux/configureStore';
+
+import App from './containers/App';
+import Home from './containers/Home';
+import SignIn from './containers/SignIn';
+import SignUp from './containers/SignUp';
 
 const store = configureStore();
 
@@ -14,7 +18,11 @@ const history = syncHistoryWithStore(browserHistory, store);
 render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={App} />
+      <Route path="/" component={App}>
+        <IndexRoute component={Home} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/signup" component={SignUp} />
+      </Route>
     </Router>
   </Provider>,
   document.getElementById('root')

@@ -16,7 +16,6 @@ class SignIn extends Component {
       identifier: this._identifier.value,
       password: this._password.value,
     };
-    console.log(creds);
     this.props.dispatch(authActions.signinUser(creds));
   }
 

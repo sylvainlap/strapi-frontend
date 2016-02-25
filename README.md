@@ -2,6 +2,13 @@
 
 A boilerplate to create a frontend for [Strapi](http://strapi.io/).
 
+## TODO
+
+errorMessage must be a reducer (cf real world example)
+create the signup page & flow
+look other boilerplates (mern, starters kits...) to see the CRUD actions structure
+remove middlewares ?
+
 ## Contains
 
 - [x] [Webpack](https://webpack.github.io)

@@ -4,10 +4,11 @@ import { browserHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 
 import rootReducer from './rootReducer';
+import { logger } from './middlewares';
 
 export default function configureStore() {
   const store = createStore(rootReducer, compose(
-    applyMiddleware(thunk, routerMiddleware(browserHistory)),
+    applyMiddleware(thunk, logger, routerMiddleware(browserHistory)),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ));
 

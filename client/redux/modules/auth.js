@@ -88,7 +88,7 @@ export const actions = {
 
 const initialState = {
   isFetching: false,
-  isAuthenticated: false, // localStorage.getItem('id_token') ? true : false
+  isAuthenticated: localStorage.getItem('strapiJwt') ? true : false,
 };
 
 export default function auth(state = initialState, action) {

@@ -1,23 +1,23 @@
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack'); // eslint-disable-line no-unused-vars
+const path = require('path');
 
 module.exports = {
   context: path.join(__dirname, './client'),
-  entry: [ './index.js' ],
+  entry: ['./index.jsx'],
   output: {
     path: path.join(__dirname, './static'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     loaders: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loaders: [ 'babel-loader' ]
-      }
-    ]
+        loaders: ['babel-loader'],
+      },
+    ],
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
-  }
-}
+    extensions: ['', '.js', '.jsx'],
+  },
+};

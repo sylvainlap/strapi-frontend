@@ -13,9 +13,10 @@ class SignIn extends Component {
     evt.preventDefault();
 
     const creds = {
-      identifier: this._identifier,
-      password: this._password,
+      identifier: this._identifier.value,
+      password: this._password.value,
     };
+    console.log(creds);
     this.props.dispatch(authActions.signinUser(creds));
   }
 
@@ -31,7 +32,7 @@ class SignIn extends Component {
               className="form-control"
               id="inputIdentifier"
               placeholder="Username or Email"
-              ref={(node) => { this._identifier = node.value; }}
+              ref={(node) => { this._identifier = node; }} // eslint-disable-line react/jsx-no-bind
             />
           </div>
         </div>
@@ -43,7 +44,7 @@ class SignIn extends Component {
               className="form-control"
               id="inputPassword"
               placeholder="Password"
-              ref={(node) => { this._password = node.value; }}
+              ref={(node) => { this._password = node; }}  // eslint-disable-line react/jsx-no-bind
             />
           </div>
         </div>

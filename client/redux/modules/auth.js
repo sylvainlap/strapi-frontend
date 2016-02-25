@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
+const baseURL = 'http://localhost:1337/api';
+
 // Constants
 
 const SIGNIN_REQUEST = 'SIGNIN_REQUEST';
@@ -44,14 +46,11 @@ function signinUser(creds) {
   return dispatch => {
     dispatch(requestJwt(creds));
 
-    return fetch('http://localhost:1337/api/auth/local', options).then((response) => {
-      response.json();
+    return fetch(`${baseURL}/auth/local`, options).then((response) => {
+      return response.json();
     }).then((json) => {
-      console.log(json);
-      // test the reponse
-      if (json.error) {
-        dispatch(signinError(json.error));
-        return Promise.reject(json.error);
+      if (!json.jwt) {
+        return Promise.reject(json.message);
       }
 
       localStorage.setItem('strapiUser', json.user);
@@ -59,8 +58,7 @@ function signinUser(creds) {
       dispatch(receiveJwt(json.user, json.jwt));
       return Promise.resolve();
     }).catch((err) => {
-      console.log(err);
-      dispatch(signinError("Error during signin."));
+      dispatch(signinError(err));
     });
   };
 }

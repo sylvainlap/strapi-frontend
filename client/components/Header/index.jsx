@@ -20,7 +20,7 @@ class Header extends Component {
       <nav className="navbar navbar-default">
         <div className="container-fluid">
           <div className="navbar-header">
-            <a className="navbar-brand" href="#">strapi frontend</a>
+            <a className="navbar-brand" href="/">strapi frontend</a>
           </div>
 
             {!isAuthenticated && <ul className="nav navbar-nav navbar-right">

@@ -38,6 +38,12 @@ $ npm run lint
 $ npm run build
 ```
 
+# The API (Strapi) part
+
+In order for this boilerplate to work, you have to configure your Strapi backend to have the 'api' prefix.
+
+Moreover, you have to create a Message endpoint, with a GET public route, and a POST / PUT / DELETE authenticated route.
+
 # License
 
 MIT

@@ -43,9 +43,7 @@ class Header extends Component {
                 </Link>
               </li>
               <li>
-                <Link to="/signout">
-                  <button type="button" className="btn btn-danger navbar-btn" onClick={this._handleClick}>Sign out</button>
-                </Link>
+                <button type="button" className="btn btn-danger navbar-btn" onClick={this._handleClick}>Sign out</button>
               </li>
             </ul>}
 

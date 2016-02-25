@@ -1,3 +1,4 @@
+import { push } from 'react-router-redux';
 import fetch from 'isomorphic-fetch';
 
 const baseURL = 'http://localhost:1337/api';
@@ -56,6 +57,7 @@ function signinUser(creds) {
       localStorage.setItem('strapiUser', json.user);
       localStorage.setItem('strapiJwt', json.jwt);
       dispatch(receiveJwt(json.user, json.jwt));
+      dispatch(push('/'));
       return Promise.resolve();
     }).catch((err) => {
       dispatch(signinError(err));
@@ -73,7 +75,8 @@ function signoutUser() {
   return dispatch => {
     localStorage.removeItem('strapiUser');
     localStorage.removeItem('strapiJwt');
-    dispatch(signout);
+    dispatch(signout());
+    dispatch(push('/'));
   };
 }
 
@@ -88,7 +91,7 @@ export const actions = {
 
 const initialState = {
   isFetching: false,
-  isAuthenticated: localStorage.getItem('strapiJwt') ? true : false,
+  isAuthenticated: localStorage.getItem('strapiJwt') !== null,
 };
 
 export default function auth(state = initialState, action) {

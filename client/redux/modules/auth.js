@@ -12,25 +12,29 @@ const SIGNOUT = 'SIGNOUT';
 
 // Actions
 
-function requestJwt(creds) {
+function requestJwt() {
   return {
     type: SIGNIN_REQUEST,
-    creds,
   };
 }
 
 function receiveJwt(user, jwt) {
   return {
     type: SIGNIN_SUCCESS,
-    user,
-    jwt,
+    payload: {
+      user,
+      jwt,
+    },
   };
 }
 
 function signinError(message) {
   return {
     type: SIGNIN_FAILURE,
-    message,
+    error: true,
+    payload: {
+      message,
+    },
   };
 }
 
@@ -45,16 +49,15 @@ function signinUser(creds) {
   };
 
   return dispatch => {
-    dispatch(requestJwt(creds));
+    dispatch(requestJwt());
 
-    return fetch(`${baseURL}/auth/local`, options).then((response) => {
-      return response.json();
-    }).then((json) => {
+    return fetch(`${baseURL}/auth/local`, options).then((response) =>
+      response.json()
+    ).then((json) => {
       if (!json.jwt) {
         return Promise.reject(json.message);
       }
 
-      localStorage.setItem('strapiUser', json.user);
       localStorage.setItem('strapiJwt', json.jwt);
       dispatch(receiveJwt(json.user, json.jwt));
       dispatch(push('/'));
@@ -73,7 +76,6 @@ function signout() {
 
 function signoutUser() {
   return dispatch => {
-    localStorage.removeItem('strapiUser');
     localStorage.removeItem('strapiJwt');
     dispatch(signout());
     dispatch(push('/'));
@@ -105,14 +107,14 @@ export default function auth(state = initialState, action) {
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: true,
-        user: action.user,
-        jwt: action.jwt,
+        user: action.payload.user,
+        jwt: action.payload.jwt,
       });
     case SIGNIN_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: false,
-        errorMessage: action.message,
+        errorMessage: action.payload.message,
       });
     case SIGNOUT:
       return Object.assign({}, state, {

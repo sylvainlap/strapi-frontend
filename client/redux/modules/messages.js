@@ -43,7 +43,7 @@ export const actions = {
 
 const initialState = {
   isFetching: false,
-  allMessages: [],
+  messages: [],
 };
 
 export default function auth(state = initialState, action) {
@@ -55,7 +55,7 @@ export default function auth(state = initialState, action) {
     case GET_MESSAGES_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        allMessages: action.payload,
+        messages: action.payload,
       });
     case GET_MESSAGES_FAILURE:
       return Object.assign({}, state, {

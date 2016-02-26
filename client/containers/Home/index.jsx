@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
+import Messages from '../../components/Messages';
 import { actions as messagesActions } from '../../redux/modules/messages';
 
 class Home extends Component {
@@ -9,16 +11,16 @@ class Home extends Component {
   }
 
   render() {
-    const { allMessages, errorMessage } = this.props;
+    const { items, errorMessage, isFetching } = this.props;
 
     return (
       <div>
         {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-        <ol>
-          {allMessages.map((message) =>
-            <li>{message.contributors[0].username} {message.content}</li>
-          )}
-        </ol>
+
+        {isFetching && <h2>Loading...</h2>}
+
+        {!isFetching &&
+          _.isEmpty(items) ? <h2>No messages yet...</h2> : <Messages messages={items} />}
       </div>
     );
   }
@@ -26,17 +28,19 @@ class Home extends Component {
 
 Home.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  allMessages: PropTypes.array.isRequired,
+  items: PropTypes.array.isRequired,
   errorMessage: PropTypes.string,
+  isFetching: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   const { messages } = state;
-  const { allMessages, errorMessage } = messages;
+  const { messages: items, errorMessage, isFetching } = messages;
 
   return {
-    allMessages,
+    items,
     errorMessage,
+    isFetching,
   };
 }
 

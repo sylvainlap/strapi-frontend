@@ -10,7 +10,7 @@ const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS';
 const SIGNIN_FAILURE = 'SIGNIN_FAILURE';
 const SIGNOUT = 'SIGNOUT';
 
-// Actions
+// Actions creators
 
 function requestJwt() {
   return {
@@ -89,7 +89,7 @@ export const actions = {
   signoutUser,
 };
 
-// Reducers
+// Reducers (must be pure !)
 
 const initialState = {
   isFetching: false,

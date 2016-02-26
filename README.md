@@ -5,6 +5,7 @@ A boilerplate to create a frontend for [Strapi](http://strapi.io/).
 ## TODO
 
 error to be handle globally, errorMessage must be a reducer (cf real world example)
+protect createMessage route (react-router-tuto ? router auth flow ? react-redux ? high order component ?)
 create the signup page & flow
 look other boilerplates (mern, starters kits...) to see the CRUD actions structure
 uglify bundle.js

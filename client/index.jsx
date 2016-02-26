@@ -10,6 +10,7 @@ import App from './containers/App';
 import Home from './containers/Home';
 import SignIn from './containers/SignIn';
 import SignUp from './containers/SignUp';
+import CreateMessage from './containers/CreateMessage';
 
 const store = configureStore();
 
@@ -22,6 +23,7 @@ render(
         <IndexRoute component={Home} />
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
+        <Route path="/createMessage" component={CreateMessage} />
       </Route>
     </Router>
   </Provider>,

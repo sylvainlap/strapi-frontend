@@ -1,6 +1,6 @@
 import { CALL_API } from 'redux-api-middleware';
 
-const baseURL = 'http://localhost:1337/api';
+const baseURL = 'http://localhost:1337/api/message';
 
 // Constants
 
@@ -10,25 +10,35 @@ const CREATE_MESSAGE_FAILURE = 'CREATE_MESSAGE_FAILURE';
 const GET_MESSAGES_REQUEST = 'GET_MESSAGES_REQUEST';
 const GET_MESSAGES_SUCCESS = 'GET_MESSAGES_SUCCESS';
 const GET_MESSAGES_FAILURE = 'GET_MESSAGES_FAILURE';
-const UPDATE_MESSAGE_REQUEST = 'UPDATE_MESSAGE_REQUEST';
-const UPDATE_MESSAGE_SUCCESS = 'UPDATE_MESSAGE_SUCCESS';
-const UPDATE_MESSAGE_FAILURE = 'UPDATE_MESSAGE_FAILURE';
-const DELETE_MESSAGE_REQUEST = 'DELETE_MESSAGE_REQUEST';
-const DELETE_MESSAGE_SUCCESS = 'DELETE_MESSAGE_SUCCESS';
-const DELETE_MESSAGE_FAILURE = 'DELETE_MESSAGE_FAILURE';
 
-// Actions
+// Actions creators
+
+function createMessage(newMessage) {
+  return {
+    [CALL_API]: {
+      endpoint: baseURL,
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json', // eslint-disable-line quote-props
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('strapiJwt')}`, // eslint-disable-line quote-props
+      },
+      body: JSON.stringify(newMessage),
+      types: [CREATE_MESSAGE_REQUEST, CREATE_MESSAGE_SUCCESS, CREATE_MESSAGE_FAILURE],
+    },
+  };
+}
 
 function getMessages() {
   return {
     [CALL_API]: {
-      endpoint: `${baseURL}/message`,
+      endpoint: baseURL,
       method: 'GET',
       headers: {
         'Accept': 'application/json', // eslint-disable-line quote-props
         'Content-Type': 'application/json',
       },
-      types: ['GET_MESSAGES_REQUEST', 'GET_MESSAGES_SUCCESS', 'GET_MESSAGES_FAILURE'],
+      types: [GET_MESSAGES_REQUEST, GET_MESSAGES_SUCCESS, GET_MESSAGES_FAILURE],
     },
   };
 }
@@ -36,10 +46,11 @@ function getMessages() {
 // Exposed Actions
 
 export const actions = {
+  createMessage,
   getMessages,
 };
 
-// Reducers
+// Reducers (must be pure !)
 
 const initialState = {
   isFetching: false,
@@ -48,6 +59,20 @@ const initialState = {
 
 export default function auth(state = initialState, action) {
   switch (action.type) {
+    case CREATE_MESSAGE_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true,
+      });
+    case CREATE_MESSAGE_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        messages: [...state.messages, action.payload],
+      });
+    case CREATE_MESSAGE_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false,
+        errorMessage: action.payload.message,
+      });
     case GET_MESSAGES_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,

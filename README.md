@@ -7,6 +7,7 @@ A boilerplate to create a frontend for [Strapi](http://strapi.io/).
 error to be handle globally, errorMessage must be a reducer (cf real world example)
 create the signup page & flow
 look other boilerplates (mern, starters kits...) to see the CRUD actions structure
+uglify bundle.js
 
 ## Contains
 

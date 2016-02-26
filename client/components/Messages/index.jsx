@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import moment from 'moment';
 
 class Messages extends Component {
   render() {
@@ -10,6 +11,7 @@ class Messages extends Component {
           <div className="panel panel-info">
             <div className="panel-heading">
               <h3 className="panel-title">{message.contributors[0].username}</h3>
+              <small>{moment(message.createdAt).format('dddd, MMMM Do YYYY, h:mm:ss a')}</small>
             </div>
             <div className="panel-body">
               {message.content}

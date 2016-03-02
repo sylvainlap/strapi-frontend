@@ -7,7 +7,9 @@ class Header extends Component {
 
     return (
       <header className="row col-12">
-        <h1><i className="fa fa-comments-o logo"></i>&nbsp;Référents Antibio</h1>
+        <Link to="/">
+          <h1><i className="fa fa-comments-o logo"></i>&nbsp;Référents Antibio</h1>
+        </Link>
         {!isAuthenticated && <div>
           <Link className="user-menu lnk-clr" to="/signin">
             <i className="fa fa-sign-in"></i>&nbsp;S'authentifier

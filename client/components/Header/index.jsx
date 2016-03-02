@@ -20,14 +20,11 @@ class Header extends Component {
         </div>}
 
         {isAuthenticated && <div>
-          <Link className="user-menu lnk-clr" to="/profile">
-            <i className="fa fa-user-md"></i>&nbsp;Dr Perrin
+          <Link className="user-menu lnk-clr" to="/signout">
+            <i className="fa fa-sign-out"></i>&nbsp;Se déconnecter
           </Link>
           <Link className="user-menu lnk-clr" to="/createMessage">
             <i className="fa fa-plus"></i>&nbsp;Créer un nouveau message
-          </Link>
-          <Link className="user-menu lnk-clr" to="/signout">
-            <i className="fa fa-sign-out"></i>&nbsp;Se déconnecter
           </Link>
         </div>}
       </header>

@@ -29,7 +29,7 @@ class App extends Component {
             <div className="log-msg col-10 col-ol-2">
               <p>
                 {errorMessage}
-                {' '}(<a href="#" onClick={this._handleDismissClick}>X</a>)
+                {' '}[<a href="#" onClick={this._handleDismissClick}>x</a>]
               </p>
             </div>
           </div>

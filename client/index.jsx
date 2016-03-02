@@ -10,8 +10,9 @@ import configureStore from './redux/configureStore';
 
 import App from './containers/App';
 import Home from './containers/Home';
-import SignIn from './containers/SignIn';
 import SignUp from './containers/SignUp';
+import SignIn from './containers/SignIn';
+import SignOut from './containers/SignOut';
 import CreateMessage from './containers/CreateMessage';
 
 const store = configureStore();
@@ -23,8 +24,9 @@ render(
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={Home} />
-        <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/signout" component={SignOut} />
         <Route path="/createMessage" component={CreateMessage} />
       </Route>
     </Router>

@@ -1,6 +1,6 @@
 import { CALL_API } from 'redux-api-middleware';
 
-const baseURL = 'http://localhost:1337/message';
+const baseURL = 'http://46.101.110.157:1337/message';
 
 // Constants
 

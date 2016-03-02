@@ -4,7 +4,6 @@ A boilerplate to create a frontend for [Strapi](http://strapi.io/).
 
 ## TODO
 
-- [ ] error to be handle globally, errorMessage must be a reducer (cf real world example)
 - [ ] protect createMessage route (react-router-tuto ? router auth flow ? react-redux ? high order component ?)
 
 ## Contains

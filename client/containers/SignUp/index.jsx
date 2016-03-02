@@ -12,16 +12,13 @@ class SignUp extends Component {
   _handleSubmit(evt) {
     evt.preventDefault();
 
-    if (this._password.value !== this._password2.value) {
-      // TODO alert
-    } else {
-      const newUser = {
-        username: this._username.value,
-        email: this._email.value,
-        password: this._password.value,
-      };
-      this.props.dispatch(authActions.createUser(newUser));
-    }
+    const newUser = {
+      username: this._username.value,
+      email: this._email.value,
+      password: this._password.value,
+      password2: this._password2.value,
+    };
+    this.props.dispatch(authActions.signupUser(newUser));
   }
 
   render() {

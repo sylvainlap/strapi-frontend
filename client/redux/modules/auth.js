@@ -37,17 +37,21 @@ function signupFailure(payload) {
 }
 
 function signupUser(newUser) {
-  const options = {
-    method: 'post',
-    headers: {
-      'Accept': 'application/json', // eslint-disable-line quote-props
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(newUser),
-  };
-
   return dispatch => {
     dispatch(signupRequest());
+
+    if (newUser.password !== newUser.password2) {
+      return dispatch(signupFailure(new Error('Les 2 mots de passe ne sont pas identiques')));
+    }
+
+    const options = {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json', // eslint-disable-line quote-props
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newUser),
+    };
 
     return fetch(`${baseURL}/auth/local/register.`, options).then((response) =>
       response.json()
@@ -88,17 +92,17 @@ function signinFailure(payload) {
 }
 
 function signinUser(creds) {
-  const options = {
-    method: 'post',
-    headers: {
-      'Accept': 'application/json', // eslint-disable-line quote-props
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(creds),
-  };
-
   return dispatch => {
     dispatch(signinRequest());
+    
+    const options = {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json', // eslint-disable-line quote-props
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(creds),
+    };
 
     return fetch(`${baseURL}/auth/local`, options).then((response) =>
       response.json()

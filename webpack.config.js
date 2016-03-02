@@ -11,9 +11,17 @@ module.exports = {
   module: {
     loaders: [
       {
+        test: /\.less$/,
+        loader: 'style/useable!css?sourceMap!autoprefixer?browsers=last 2 version!less-loader?sourceMap=true',
+      },
+      {
+        test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
+        loader: 'file',
+      },
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loaders: ['babel-loader'],
+        loader: 'babel-loader',
       },
     ],
   },

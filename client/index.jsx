@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 import { render } from 'react-dom';
 import React from 'react';
 
+import '!style!css!less!./styles/importer.less';
+
 import configureStore from './redux/configureStore';
 
 import App from './containers/App';

@@ -1,0 +1,253 @@
+*{
+	box-sizing: border-box;
+}
+
+// TYPOS
+
+// --- TITLES
+.h(@l, @i: 1) when (@i =< 6) {
+	h@{i}{
+      font-size: (2-0.2*@i)*@l;
+	   font-weight: bold;
+	   margin-top: (2-0.2*@i)*0.1em;
+	   margin-bottom: (2-0.2*@i)*0.1em;
+   }
+
+   .h(1em, (@i+1));
+}
+.h(1em);
+
+// --- LINK
+.lnk-clr{
+   text-decoration: none;
+   color: inherit;
+   border: none;
+   outline: none;
+   &:hover, &:visited, &:focus{
+      text-decoration: none;
+      color: inherit;
+      border: none;
+      outline: none;
+   }
+}
+
+// --- TXT
+.txt(@c){
+	color: @c;
+}
+.txt-danger	{.txt(darken(@danger, 20%));}
+.txt-warning{.txt(darken(@warning, 20%));}
+.txt-success{.txt(darken(@success, 20%));}
+.txt-info	{.txt(darken(@info, 20%));}
+.txt-primary{.txt(darken(@primary, 20%));}
+.txt-second	{.txt(darken(@second, 20%));}
+
+.txt-r{text-align: right;}
+.txt-c{text-align: center;}
+.txt-l{text-align: left;}
+.txt-j{text-align: justify;}
+
+// LAYOUTS
+// --- CLEANER
+.p0{
+   padding: 0;
+}
+.m0{
+   margin: 0;
+}
+.pm0{
+   .p0;
+   .m0;
+}
+.circle(@r){
+   height: @r*2;
+   width: @r*2;
+   border-radius: @r;
+}
+// --- BG
+.bg(@c){
+	background-color: @c;
+}
+.bg-danger	{.bg(lighten(@danger, 20%));}
+.bg-warning	{.bg(lighten(@warning, 20%));}
+.bg-success	{.bg(lighten(@success, 20%));}
+.bg-info	   {.bg(lighten(@info, 20%));}
+.bg-primary	{.bg(lighten(@primary, 20%));}
+.bg-second	{.bg(lighten(@second, 20%));}
+
+.btn-bg(@c){
+   .bg(@c);
+   &:hover{
+      .bg(darken(@c, 10%));
+   }
+}
+// --- SHADOWS
+.shadow-l{
+   box-shadow: 5px 5px 5px 0px fadeOut(@b, 75%);
+}
+.shadow-r{
+   box-shadow: -5px 5px 5px 0px fadeOut(@b, 75%);
+}
+.shadow-b{
+   box-shadow: 0px 5px 10px 2.5px fadeOut(@b, 75%);
+}
+
+// --- FORMS
+.form-input-bloc{
+   font-size: 1em;
+   line-height: 1.5em;
+   height: 2em;
+   padding-top: .25em;
+   padding-bottom: .25em;
+
+}
+.noborder{
+   border: none;
+   &:focus, &:visited{
+      border: none;
+      outline: none;
+   }
+}
+label{
+   .form-input-bloc;
+   .col-4;
+   .txt-r;
+   padding-left: 1em;
+   padding-right: 1em;
+   .bg(@base1);
+}
+input{
+   &[type="text"],
+   &[type="number"],
+   &[type="email"],
+   &[type="password"]{
+      .form-input-bloc;
+      .noborder;
+      .col-8;
+      padding: .25em;
+
+   }
+}
+textarea{
+   .noborder;
+}
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"]{
+   .form-input-bloc;
+   .noborder;
+   .btn-bg(@base1);
+   .shadow-b;
+   cursor: pointer;
+}
+.input-group{
+   .col-12;
+   margin-bottom: .5em;
+}
+
+
+// --- GRID
+.row{
+	float: left;
+	width: 100%;
+}
+.grid-col(@c){
+	.row &{
+		float: left;
+	}
+	.row td&{
+		float: none;
+	}
+	width: @c/@grid*100%;
+}
+.grid-col-ol(@c){
+	margin-left: @c/@grid*100%;
+}
+.grid-col-or(@c){
+	margin-right: @c/@grid*100%;
+}
+
+.generate-columns(@grid);
+
+.generate-columns(@n, @i: 1) when (@i =< @n) {
+  .col-@{i} { .grid-col(@i); }
+  .col-ol-@{i} { .grid-col-ol(@i); }
+  .col-or-@{i} { .grid-col-or(@i); }
+
+  .generate-columns(@n, (@i + 1));
+}
+
+// --- ABS / FIX / REL
+.relative{
+	position: relative;
+}
+.clear-abs{
+	top: auto;
+	left: auto;
+	right: auto;
+	bottom: auto;
+	.transform(none);
+}
+.absolute(@t, @r, @b, @l){
+	position: absolute;
+	top: @t;
+	left: @l;
+	right: @r;
+	bottom: @b;
+}
+.fixed(@t, @r, @b, @l){
+	position: fixed;
+	top: @t;
+	left: @l;
+	right: @r;
+	bottom: @b;
+}
+.centered(@h, @v){
+	position: absolute;
+	top: @v;
+	left: @h;
+	bottom: auto;
+	right: auto;
+	.transform(translate(-@h, -@v));
+}
+.centered-hv{
+	.centered(50%, 50%);
+}
+.centered-v{
+	.centered(0, 50%);
+}
+.centered-h{
+	.centered(50%, 0);
+}
+.abs-tr{
+	.absolute(0, 0, auto, auto);
+}
+.abs-tl{
+	.absolute(0, auto, auto, 0);
+}
+.abs-br{
+	.absolute(auto, 0, 0, auto);
+}
+.abs-bl{
+	.absolute(auto, auto, 0, 0);
+}
+.fix-tr{
+	.fixed(0, 0, auto, auto);
+}
+.fix-tl{
+	.fixed(0, auto, auto, 0);
+}
+.fix-br{
+	.fixed(auto, 0, 0, auto);
+}
+.fix-bl{
+	.fixed(auto, auto, 0, 0);
+}
+
+//=============================================== CSS3 =========================
+.transform(@t){
+	-ms-transform: @t;
+    -webkit-transform: @t;
+    transform: @t;
+}

@@ -5,6 +5,9 @@ const baseURL = 'http://localhost:1337';
 
 // Constants
 
+const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
+const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+const SIGNUP_FAILURE = 'SIGNIN_FAILURE';
 const SIGNIN_REQUEST = 'SIGNIN_REQUEST';
 const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS';
 const SIGNIN_FAILURE = 'SIGNIN_FAILURE';
@@ -12,29 +15,75 @@ const SIGNOUT = 'SIGNOUT';
 
 // Actions creators
 
-function requestJwt() {
+function signupRequest() {
+  return {
+    type: SIGNUP_REQUEST,
+  };
+}
+
+function signupSuccess(payload) {
+  return {
+    type: SIGNUP_SUCCESS,
+    payload,
+  };
+}
+
+function signupFailure(payload) {
+  return {
+    type: SIGNUP_FAILURE,
+    error: true,
+    payload,
+  };
+}
+
+function signupUser(newUser) {
+  const options = {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json', // eslint-disable-line quote-props
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newUser),
+  };
+
+  return dispatch => {
+    dispatch(signupRequest());
+
+    return fetch(`${baseURL}/auth/local/register.`, options).then((response) =>
+      response.json()
+    ).then((json) => {
+      if (!json.jwt) {
+        return Promise.reject(new Error(json.message));
+      }
+
+      localStorage.setItem('strapiJwt', json.jwt);
+      dispatch(signupSuccess(json));
+      dispatch(push('/'));
+      return Promise.resolve();
+    }).catch((err) => {
+      dispatch(signupFailure(err));
+    });
+  };
+}
+
+function signinRequest() {
   return {
     type: SIGNIN_REQUEST,
   };
 }
 
-function receiveJwt(user, jwt) {
+function signinSuccess(payload) {
   return {
     type: SIGNIN_SUCCESS,
-    payload: {
-      user,
-      jwt,
-    },
+    payload,
   };
 }
 
-function signinError(message) {
+function signinFailure(payload) {
   return {
     type: SIGNIN_FAILURE,
     error: true,
-    payload: {
-      message,
-    },
+    payload,
   };
 }
 
@@ -49,21 +98,21 @@ function signinUser(creds) {
   };
 
   return dispatch => {
-    dispatch(requestJwt());
+    dispatch(signinRequest());
 
     return fetch(`${baseURL}/auth/local`, options).then((response) =>
       response.json()
     ).then((json) => {
       if (!json.jwt) {
-        return Promise.reject(json.message);
+        return Promise.reject(new Error(json.message));
       }
 
       localStorage.setItem('strapiJwt', json.jwt);
-      dispatch(receiveJwt(json.user, json.jwt));
+      dispatch(signinSuccess(json));
       dispatch(push('/'));
       return Promise.resolve();
     }).catch((err) => {
-      dispatch(signinError(err));
+      dispatch(signinFailure(err));
     });
   };
 }
@@ -85,6 +134,7 @@ function signoutUser() {
 // Exposed Actions
 
 export const actions = {
+  signupUser,
   signinUser,
   signoutUser,
 };
@@ -98,6 +148,24 @@ const initialState = {
 
 export default function auth(state = initialState, action) {
   switch (action.type) {
+    case SIGNUP_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true,
+        isAuthenticated: false,
+      });
+    case SIGNUP_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        isAuthenticated: true,
+        user: action.payload.user,
+        jwt: action.payload.jwt,
+      });
+    case SIGNUP_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false,
+        isAuthenticated: false,
+        error: action.payload,
+      });
     case SIGNIN_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
@@ -114,7 +182,7 @@ export default function auth(state = initialState, action) {
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: false,
-        errorMessage: action.payload.message,
+        error: action.payload,
       });
     case SIGNOUT:
       return Object.assign({}, state, {

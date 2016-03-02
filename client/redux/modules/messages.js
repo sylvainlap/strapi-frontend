@@ -1,7 +1,5 @@
 import { CALL_API } from 'redux-api-middleware';
 
-const baseURL = 'http://46.101.110.157:1337/message';
-
 // Constants
 
 const CREATE_MESSAGE_REQUEST = 'CREATE_MESSAGE_REQUEST';
@@ -17,7 +15,7 @@ function createMessage(newMessage) {
   // todo: use thunk to redirect
   return {
     [CALL_API]: {
-      endpoint: baseURL,
+      endpoint: '/message',
       method: 'POST',
       headers: {
         'Accept': 'application/json', // eslint-disable-line quote-props
@@ -33,7 +31,7 @@ function createMessage(newMessage) {
 function getMessages() {
   return {
     [CALL_API]: {
-      endpoint: baseURL,
+      endpoint: '/message',
       method: 'GET',
       headers: {
         'Accept': 'application/json', // eslint-disable-line quote-props

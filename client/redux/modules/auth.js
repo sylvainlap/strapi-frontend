@@ -1,8 +1,6 @@
 import { push } from 'react-router-redux';
 import fetch from 'isomorphic-fetch';
 
-const baseURL = 'http://46.101.110.157:1337';
-
 // Constants
 
 const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
@@ -53,7 +51,7 @@ function signupUser(newUser) {
       body: JSON.stringify(newUser),
     };
 
-    return fetch(`${baseURL}/auth/local/register`, options).then((response) =>
+    return fetch('/auth/local/register', options).then((response) =>
       response.json()
     ).then((json) => {
       if (!json.jwt) {
@@ -94,7 +92,7 @@ function signinFailure(payload) {
 function signinUser(creds) {
   return dispatch => {
     dispatch(signinRequest());
-    
+
     const options = {
       method: 'post',
       headers: {
@@ -104,7 +102,7 @@ function signinUser(creds) {
       body: JSON.stringify(creds),
     };
 
-    return fetch(`${baseURL}/auth/local`, options).then((response) =>
+    return fetch('/auth/local', options).then((response) =>
       response.json()
     ).then((json) => {
       if (!json.jwt) {

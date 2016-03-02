@@ -6,10 +6,10 @@ import { actions as messagesActions } from '../../redux/modules/messages';
 class CreateMessage extends Component {
   constructor() {
     super();
-    this._handleClick = this._handleClick.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
-  _handleClick(evt) {
+  _handleSubmit(evt) {
     evt.preventDefault();
 
     const newMessage = {
@@ -24,7 +24,7 @@ class CreateMessage extends Component {
     return (
       <div>
         {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-        <form className="form-horizontal">
+        <form className="form-horizontal" onSubmit={this._handleSubmit}>
           <h2>Create a new message</h2>
           <div className="form-group">
             <label htmlFor="textareaContent" className="col-sm-2 control-label">Content</label>
@@ -40,7 +40,7 @@ class CreateMessage extends Component {
           </div>
           <div className="form-group">
             <div className="col-sm-offset-2 col-sm-10">
-              <button type="submit" className="btn btn-success" onClick={this._handleClick}>Create</button>
+              <button type="submit" className="btn btn-success">Create</button>
             </div>
           </div>
         </form>

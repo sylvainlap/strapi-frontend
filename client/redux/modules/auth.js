@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux';
 import fetch from 'isomorphic-fetch';
 
-const baseURL = 'http://localhost:1337/api';
+const baseURL = 'http://localhost:1337';
 
 // Constants
 

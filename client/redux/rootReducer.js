@@ -6,8 +6,8 @@ import errorMessage from './modules/errorMessage';
 import messages from './modules/messages';
 
 export default combineReducers({
+  messages,
   auth,
   errorMessage,
-  messages,
   routing,
 });

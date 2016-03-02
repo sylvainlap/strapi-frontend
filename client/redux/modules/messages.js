@@ -71,7 +71,6 @@ export default function auth(state = initialState, action) {
     case CREATE_MESSAGE_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
-        errorMessage: action.payload.message,
       });
     case GET_MESSAGES_REQUEST:
       return Object.assign({}, state, {
@@ -85,7 +84,6 @@ export default function auth(state = initialState, action) {
     case GET_MESSAGES_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
-        errorMessage: action.payload.message,
       });
     default:
       return state;

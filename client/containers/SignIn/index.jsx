@@ -6,10 +6,10 @@ import { actions as authActions } from '../../redux/modules/auth';
 class SignIn extends Component {
   constructor() {
     super();
-    this._handleClick = this._handleClick.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
-  _handleClick(evt) {
+  _handleSubmit(evt) {
     evt.preventDefault();
 
     const creds = {
@@ -21,38 +21,35 @@ class SignIn extends Component {
 
   render() {
     return (
-      <form className="form-horizontal">
-        <h2>Please sign in</h2>
-        <div className="form-group">
-          <label htmlFor="inputIdentifier" className="col-sm-2 control-label">Identifier</label>
-          <div className="col-sm-10">
+      <main>
+        <div className="page-logo col12">
+          <span>
+            <i className="fa fa-lock"></i>
+          </span>
+        </div>
+        <h1 className="page-title">Connexion</h1>
+        <form className="col-6 col-ol-3" onSubmit={this._handleSubmit}>
+          <div className="input-group">
+            <label htmlFor="identifier">Identifiant</label>
             <input
               type="text"
-              className="form-control"
-              id="inputIdentifier"
-              placeholder="Username or Email"
+              id="identifier"
               ref={(node) => { this._identifier = node; }} // eslint-disable-line react/jsx-no-bind
             />
           </div>
-        </div>
-        <div className="form-group">
-          <label htmlFor="inputPassword" className="col-sm-2 control-label">Password</label>
-          <div className="col-sm-10">
+          <div className="input-group">
+            <label htmlFor="password">Mot de passe</label>
             <input
               type="password"
-              className="form-control"
-              id="inputPassword"
-              placeholder="Password"
-              ref={(node) => { this._password = node; }}  // eslint-disable-line react/jsx-no-bind
+              id="password"
+              ref={(node) => { this._password = node; }} // eslint-disable-line react/jsx-no-bind
             />
           </div>
-        </div>
-        <div className="form-group">
-          <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-default" onClick={this._handleClick}>Sign in</button>
+          <div className="input-group">
+            <button type="submit" className="col-4 col-ol-4">Se connecter</button>
           </div>
-        </div>
-      </form>
+        </form>
+      </main>
     );
   }
 }

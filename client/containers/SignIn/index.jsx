@@ -24,7 +24,7 @@ class SignIn extends Component {
       <main>
         <div className="page-logo col12">
           <span>
-            <i className="fa fa-lock"></i>
+            <i className="fa fa-sign-in"></i>
           </span>
         </div>
         <h1 className="page-title">Connexion</h1>

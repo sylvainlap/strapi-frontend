@@ -164,7 +164,6 @@ export default function auth(state = initialState, action) {
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: false,
-        error: action.payload,
       });
     case SIGNIN_REQUEST:
       return Object.assign({}, state, {
@@ -182,7 +181,6 @@ export default function auth(state = initialState, action) {
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: false,
-        error: action.payload,
       });
     case SIGNOUT:
       return Object.assign({}, state, {

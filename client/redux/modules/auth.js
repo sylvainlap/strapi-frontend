@@ -53,7 +53,7 @@ function signupUser(newUser) {
       body: JSON.stringify(newUser),
     };
 
-    return fetch(`${baseURL}/auth/local/register.`, options).then((response) =>
+    return fetch(`${baseURL}/auth/local/register`, options).then((response) =>
       response.json()
     ).then((json) => {
       if (!json.jwt) {

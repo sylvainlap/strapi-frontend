@@ -4,8 +4,8 @@ A boilerplate to create a frontend for [Strapi](http://strapi.io/).
 
 ## TODO
 
-- [] error to be handle globally, errorMessage must be a reducer (cf real world example)
-- [] protect createMessage route (react-router-tuto ? router auth flow ? react-redux ? high order component ?)
+- [ ] error to be handle globally, errorMessage must be a reducer (cf real world example)
+- [ ] protect createMessage route (react-router-tuto ? router auth flow ? react-redux ? high order component ?)
 
 ## Contains
 
@@ -41,12 +41,6 @@ $ npm run lint
 ```
 $ npm run build
 ```
-
-# The API (Strapi) part
-
-In order for this boilerplate to work, you have to configure your Strapi backend to have the 'api' prefix.
-
-Moreover, you have to create a Message endpoint, with a GET public route, and a POST / PUT / DELETE authenticated route.
 
 # License
 

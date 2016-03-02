@@ -14,6 +14,7 @@ const GET_MESSAGES_FAILURE = 'GET_MESSAGES_FAILURE';
 // Actions creators
 
 function createMessage(newMessage) {
+  // todo: use thunk to redirect
   return {
     [CALL_API]: {
       endpoint: baseURL,

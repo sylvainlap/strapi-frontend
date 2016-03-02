@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 
-import Messages from '../../components/Messages';
+import MessageList from '../../components/MessageList';
 import { actions as messagesActions } from '../../redux/modules/messages';
 
 class Home extends Component {
@@ -11,17 +10,27 @@ class Home extends Component {
   }
 
   render() {
-    const { items, errorMessage, isFetching } = this.props;
+    const { items, isFetching } = this.props;
 
     return (
-      <div>
-        {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-
-        {isFetching && <h2>Loading...</h2>}
-
-        {!isFetching &&
-          _.isEmpty(items) ? <h2>No messages yet...</h2> : <Messages messages={items} />}
-      </div>
+      <main>
+        {isFetching &&
+          <h1>Loading...</h1> // TODO: change
+        }
+        <div className="page-logo col-12">
+          <span>
+            <i className="fa fa-files-o"></i>
+          </span>
+        </div>
+        <h1 className="page-title">Questions / Réponses</h1>
+        <div className="search-input col-12">
+          <input type="text" placeholder="Rechercher ..." />
+          <button>
+            <span><i className="fa fa-search"></i></span>
+          </button>
+        </div>
+        <MessageList messages={items} />
+      </main>
     );
   }
 }
@@ -29,17 +38,15 @@ class Home extends Component {
 Home.propTypes = {
   dispatch: PropTypes.func.isRequired,
   items: PropTypes.array.isRequired,
-  errorMessage: PropTypes.string,
   isFetching: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   const { messages } = state;
-  const { messages: items, errorMessage, isFetching } = messages;
+  const { messages: items, isFetching } = messages;
 
   return {
     items,
-    errorMessage,
     isFetching,
   };
 }

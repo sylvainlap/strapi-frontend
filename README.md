@@ -41,6 +41,15 @@ $ npm run lint
 $ npm run build
 ```
 
+## Installation with Strapi
+
+```
+$ strapi new project
+$ cd project
+$ strapi generate api message title:string content:string tags:string
+$ cp <path of strapi-frontend>/static/* ./public
+```
+
 # License
 
 MIT

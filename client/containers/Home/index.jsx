@@ -23,6 +23,10 @@ class Home extends Component {
     _.forEach(this.props.items, (item) => {
       if (_.includes(item.title, evt.target.value)) {
         filteredMessage.push(item);
+      } else if (_.includes(item.content, evt.target.value)) {
+        filteredMessage.push(item);
+      } else if (_.includes(item.tags, evt.target.value)) {
+        filteredMessage.push(item);
       }
     });
     this.setState({

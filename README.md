@@ -5,6 +5,7 @@ A boilerplate to create a frontend for [Strapi](http://strapi.io/).
 ## TODO
 
 - [ ] protect createMessage route (react-router-tuto ? router auth flow ? react-redux ? high order component ?)
+- [ ] redirect after message creation
 
 ## Contains
 

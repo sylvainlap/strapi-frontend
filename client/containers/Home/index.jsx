@@ -21,11 +21,11 @@ class Home extends Component {
   _handleSearchChange(evt) {
     const filteredMessage = [];
     _.forEach(this.props.items, (item) => {
-      if (_.includes(item.title, evt.target.value)) {
+      if (_.includes(_.toLower(item.title), _.toLower(evt.target.value))) {
         filteredMessage.push(item);
-      } else if (_.includes(item.content, evt.target.value)) {
+      } else if (_.includes(_.toLower(item.content), _.toLower(evt.target.value))) {
         filteredMessage.push(item);
-      } else if (_.includes(item.tags, evt.target.value)) {
+      } else if (_.includes(_.toLower(item.tags), _.toLower(evt.target.value))) {
         filteredMessage.push(item);
       }
     });

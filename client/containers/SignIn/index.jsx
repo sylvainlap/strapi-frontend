@@ -32,7 +32,7 @@ class SignIn extends Component {
           <div className="input-group">
             <label className="col-4" htmlFor="identifier">Identifiant</label>
             <input
-							className="col-8"
+              className="col-8"
               type="text"
               id="identifier"
               ref={(node) => { this._identifier = node; }} // eslint-disable-line react/jsx-no-bind
@@ -41,7 +41,7 @@ class SignIn extends Component {
           <div className="input-group">
             <label className="col-4" htmlFor="password">Mot de passe</label>
             <input
-							className="col-8"
+              className="col-8"
               type="password"
               id="password"
               ref={(node) => { this._password = node; }} // eslint-disable-line react/jsx-no-bind

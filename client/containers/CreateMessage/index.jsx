@@ -34,7 +34,7 @@ class CreateMessage extends Component {
             <label className="col-4" htmlFor="title">Titre</label>
             <input
               type="text"
-							className="col-8"
+              className="col-8"
               id="title"
               ref={(node) => { this._title = node; }} // eslint-disable-line react/jsx-no-bind
             />
@@ -54,7 +54,7 @@ class CreateMessage extends Component {
             <input
               type="text"
               id="tags"
-							className="col-8"
+              className="col-8"
               ref={(node) => { this._tags = node; }} // eslint-disable-line react/jsx-no-bind
             />
           </div>
@@ -96,7 +96,10 @@ class CreateMessage extends Component {
               </td>
               <td className="question">
                 <div className="msg user">
-                  <p>Pourquoi utilise-t-on des antibiotiques en élevage sur des animaux qui ne sont pas malades?</p>
+                  <p>
+                    Pourquoi utilise-t-on des antibiotiques en élevage sur des animaux
+                    qui ne sont pas malades?
+                  </p>
                 </div>
                 <div className="msg ref">
                   <p>

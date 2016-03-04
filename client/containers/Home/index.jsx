@@ -40,7 +40,13 @@ class Home extends Component {
     return (
       <main>
         {isFetching &&
-          <h1>Loading...</h1> // TODO: change
+          <div className="wait">
+             <div className="wait-icon">
+                <span>
+                   <i className="fa fa-spin fa-spinner"></i>
+                </span>
+             </div>
+          </div>
         }
         <div className="page-logo col-12">
           <span>

@@ -32,32 +32,36 @@ class SignUp extends Component {
         <h1 className="page-title">Créer un nouvel utilisateur</h1>
         <form className="col-6 col-ol-3" onSubmit={this._handleSubmit}>
           <div className="input-group">
-            <label htmlFor="username">Nom d'utilisateur</label>
+            <label className="col-4" htmlFor="username">Nom d'utilisateur</label>
             <input
+							className="col-8"
               type="text"
               id="username"
               ref={(node) => { this._username = node; }} // eslint-disable-line react/jsx-no-bind
             />
           </div>
           <div className="input-group">
-            <label htmlFor="email">Email</label>
+            <label className="col-4" htmlFor="email">Email</label>
             <input
+							className="col-8"
               type="email"
               id="email"
               ref={(node) => { this._email = node; }} // eslint-disable-line react/jsx-no-bind
             />
           </div>
           <div className="input-group">
-            <label htmlFor="password">Mot de passe</label>
+            <label className="col-4" htmlFor="password">Mot de passe</label>
             <input
+							className="col-8"
               type="password"
               id="password"
               ref={(node) => { this._password = node; }} // eslint-disable-line react/jsx-no-bind
             />
           </div>
           <div className="input-group">
-            <label htmlFor="password2">Confirmation</label>
+            <label className="col-4" htmlFor="password2">Confirmation</label>
             <input
+							className="col-8"
               type="password"
               id="password2"
               ref={(node) => { this._password2 = node; }} // eslint-disable-line react/jsx-no-bind

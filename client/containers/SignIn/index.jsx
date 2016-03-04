@@ -30,16 +30,18 @@ class SignIn extends Component {
         <h1 className="page-title">Connexion</h1>
         <form className="col-6 col-ol-3" onSubmit={this._handleSubmit}>
           <div className="input-group">
-            <label htmlFor="identifier">Identifiant</label>
+            <label className="col-4" htmlFor="identifier">Identifiant</label>
             <input
+							className="col-8"
               type="text"
               id="identifier"
               ref={(node) => { this._identifier = node; }} // eslint-disable-line react/jsx-no-bind
             />
           </div>
           <div className="input-group">
-            <label htmlFor="password">Mot de passe</label>
+            <label className="col-4" htmlFor="password">Mot de passe</label>
             <input
+							className="col-8"
               type="password"
               id="password"
               ref={(node) => { this._password = node; }} // eslint-disable-line react/jsx-no-bind

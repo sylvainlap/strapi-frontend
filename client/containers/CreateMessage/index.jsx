@@ -31,15 +31,16 @@ class CreateMessage extends Component {
         <h1 className="page-title">Nouvelle question</h1>
         <form className="col-6 col-ol-3" onSubmit={this._handleSubmit}>
           <div className="input-group">
-            <label htmlFor="title">Titre</label>
+            <label className="col-4" htmlFor="title">Titre</label>
             <input
               type="text"
+							className="col-8"
               id="title"
               ref={(node) => { this._title = node; }} // eslint-disable-line react/jsx-no-bind
             />
           </div>
           <div className="input-group">
-            <label htmlFor="content">Question</label>
+            <label className="col-4" htmlFor="content">Question</label>
              <textarea
                className="col-8"
                rows="5"
@@ -49,10 +50,11 @@ class CreateMessage extends Component {
              </textarea>
           </div>
           <div className="input-group">
-            <label htmlFor="tags">Tags</label>
+            <label className="col-4" htmlFor="tags">Tags</label>
             <input
               type="text"
               id="tags"
+							className="col-8"
               ref={(node) => { this._tags = node; }} // eslint-disable-line react/jsx-no-bind
             />
           </div>

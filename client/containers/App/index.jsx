@@ -26,11 +26,15 @@ class App extends Component {
             <div className="log-icon">
               <i className="fa"></i>
             </div>
-            <div className="log-msg col-10 col-ol-2">
+            <div className="log-msg col-8 col-ol-2">
               <p>
                 {errorMessage}
-                {' '}[<a href="#" onClick={this._handleDismissClick}>x</a>]
               </p>
+            </div>
+            <div className="log-close">
+              <a className="lnk-clr" href="" onClick={this._handleDismissClick}>
+                <i className="fa fa-remove"></i>
+              </a>
             </div>
           </div>
         </div>}

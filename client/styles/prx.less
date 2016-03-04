@@ -75,12 +75,6 @@
 .bg-primary	{.bg(lighten(@primary, 20%));}
 .bg-second	{.bg(lighten(@second, 20%));}
 
-.btn-bg(@c){
-   .bg(@c);
-   &:hover{
-      .bg(darken(@c, 10%));
-   }
-}
 // --- SHADOWS
 .shadow-l{
    box-shadow: 5px 5px 5px 0px fadeOut(@b, 75%);
@@ -110,7 +104,6 @@
 }
 label{
    .form-input-bloc;
-   .col-4;
    .txt-r;
    padding-left: 1em;
    padding-right: 1em;
@@ -123,7 +116,6 @@ input{
    &[type="password"]{
       .form-input-bloc;
       .noborder;
-      .col-8;
       padding: .25em;
 
    }
@@ -131,6 +123,11 @@ input{
 textarea{
    .noborder;
 }
+.btn{
+   display: block;
+   .txt-c;
+}
+.btn,
 button,
 input[type="button"],
 input[type="submit"],
@@ -140,7 +137,25 @@ input[type="reset"]{
    .btn-bg(@base1);
    .shadow-b;
    cursor: pointer;
+	font-family: @base-font;
+	font-size: 1em;
 }
+.btn-bg(@c){
+   .bg(@c);
+   color: @w;
+   &:hover{
+      .bg(darken(@c, 10%));
+   }
+}
+
+.btn-danger	{.btn-bg(@danger);}
+.btn-warning	{.btn-bg(@warning);}
+.btn-success	{.btn-bg(@success);}
+.btn-info	   {.btn-bg(@info);}
+.btn-primary	{.btn-bg(@primary);}
+.btn-second	{.bg(lighten(@second, 20%));}
+
+
 .input-group{
    .col-12;
    margin-bottom: .5em;

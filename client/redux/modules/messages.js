@@ -1,4 +1,5 @@
 import { CALL_API } from 'redux-api-middleware';
+import { push } from 'react-router-redux';
 
 const baseUrl = 'http://188.166.155.187:1337/message';
 
@@ -14,19 +15,24 @@ const GET_MESSAGES_FAILURE = 'GET_MESSAGES_FAILURE';
 // Actions creators
 
 function createMessage(newMessage) {
-  // todo: use thunk to redirect
-  return {
-    [CALL_API]: {
-      endpoint: baseUrl,
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json', // eslint-disable-line quote-props
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('strapiJwt')}`, // eslint-disable-line quote-props
+  return dispatch => {
+    dispatch({
+      [CALL_API]: {
+        endpoint: baseUrl,
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json', // eslint-disable-line quote-props
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('strapiJwt')}`, // eslint-disable-line quote-props
+        },
+        body: JSON.stringify(newMessage),
+        types: [CREATE_MESSAGE_REQUEST, CREATE_MESSAGE_SUCCESS, CREATE_MESSAGE_FAILURE],
       },
-      body: JSON.stringify(newMessage),
-      types: [CREATE_MESSAGE_REQUEST, CREATE_MESSAGE_SUCCESS, CREATE_MESSAGE_FAILURE],
-    },
+    }).then((action) => {
+      if (action.type === CREATE_MESSAGE_SUCCESS) {
+        dispatch(push('/'));
+      }
+    });
   };
 }
 
